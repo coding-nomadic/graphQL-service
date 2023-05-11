@@ -1,0 +1,41 @@
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+type Mutation{
+createAlarm(alarm:AlarmCommandRequest!):Alarm
+updateAlarm(alarm:AlarmCommandUpdateRequest!,id: ID!):Alarm
+deleteAlarm(alarmId:Int!):Boolean
+}
+type Query{
+getAllSeverity:[Severity]
+getAlarm(alarmId:Int!):Alarm
+
+}
+
+type Alarm{
+    id:ID!
+    name:String
+    severityId:Int
+    productTypeId:Int
+    readOnly: Boolean
+}
+
+type Severity{
+    id:ID!
+    severity:String
+    displayOrder:Int
+}
+
+input AlarmCommandRequest{
+    business:String
+    productType:String
+    name:String
+    severity:String
+    readonly:Boolean
+}
+input AlarmCommandUpdateRequest{
+    name:String
+    severity:String
+}
